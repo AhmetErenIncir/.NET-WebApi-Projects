@@ -1,1 +1,1 @@
-This project has been created to This project was created to simulate basic HTTP requests such as http post, http get. Data manipulated with CRUD operations were kept in the database. This project will be updated with Entity Framework in the future.
+This project was created to simulate basic HTTP requests such as http post, http get. Data manipulated with CRUD operations were kept in the database. This project will be updated with Entity Framework in the future.
