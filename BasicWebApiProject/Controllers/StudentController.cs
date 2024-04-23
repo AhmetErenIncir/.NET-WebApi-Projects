@@ -13,21 +13,14 @@ namespace BasicWebApiProject.Controllers;
 public class StudentController : ControllerBase
 {
     public readonly IConfiguration _configuration;
+    public static List<Student> Students = new List<Student>();
 
     public StudentController(IConfiguration configuration)
     {
         _configuration = configuration;
     }
-    static List<Student> Students = new List<Student>()
-    {
-        new Student(){Id = 1,Name = "Ahmet Eren",SurName = "Incir"},
-        new Student(){Id = 2,Name = "Mustafa",SurName = "Ayar"},
-        new Student(){Id = 3,Name = "Özgül",SurName = "Incir"},
-        new Student(){Id = 4,Name = "Mehmet",SurName = "Incir"},
-    };
 
-    [HttpGet]
-    public List<Student> Get()
+    private List<Student> LoadData()
     {
         List<Student> list = new List<Student>();
         using (var con = new SqlConnection(_configuration.GetConnectionString("StudentDbCon")))
@@ -45,15 +38,37 @@ public class StudentController : ControllerBase
                 list.Add(student);
             }
         }
-
-
         return list;
+    }
+
+    private void InsertData(Student student)
+    {
+        using (var con = new SqlConnection(_configuration.GetConnectionString("StudentDbCon")))
+        {
+            con.Open();
+            var sql = "INSERT INTO [Student].[dbo].[Students](ID,NAME, SURNAME) VALUES(@ID,@NAME, @SURNAME)";
+            using (var cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.AddWithValue("@ID", student.Id);
+                cmd.Parameters.AddWithValue("@NAME", student.Name);
+                cmd.Parameters.AddWithValue("@SURNAME", student.SurName);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    [HttpGet]
+    public List<Student> Get()
+    {
+        return LoadData();
     }
 
     [HttpGet("{id}")]
     public Student Get(int id)
     {
-        var result = Students.FirstOrDefault(x => x.Id == id);
+        var data = LoadData();
+        var result = data.FirstOrDefault(x => x.Id == id);
         if (result != null)
         {
             return result;
@@ -66,7 +81,7 @@ public class StudentController : ControllerBase
     [HttpPost]
     public Student Post(Student student)
     {
-        Students.Add(student);
+        InsertData(student);
         return student;
     }
 }
