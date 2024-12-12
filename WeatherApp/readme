@@ -1,0 +1,45 @@
+Weather API Project 🌤️
+
+This is a basic web API project aimed at connecting a frontend (HTML/JavaScript) to a backend (.NET) using RESTful APIs. The project is in its early stages and will be developed further with additional features.
+
+Project Overview
+	•	Frontend: HTML, JavaScript
+	•	Backend: .NET Web API
+	•	Goal: To create a simple web app where users can fetch weather data by interacting with the backend API.
+
+Future Development Plans
+
+Phase 1: Database Integration
+	•	Add database connectivity to store and manage weather data.
+
+Phase 2: Interactive Map Feature
+	•	Integrate an interactive map on the client side to allow users to select a city.
+	•	Consider using React for building this interactive map.
+
+How to Run the Project
+	1.	Backend:
+	•	Ensure you have the .NET SDK installed.
+	•	Navigate to the backend project directory and run:
+
+dotnet run
+
+
+	•	The API will be available at http://localhost:5048.
+
+	2.	Frontend:
+	•	Open the index.html file in your browser or use a local server (e.g., Live Server for VS Code).
+	•	Ensure the frontend connects to the correct backend endpoint.
+
+API Endpoints
+
+Method	Endpoint	Description
+GET	/weather	Fetch weather data
+
+Dependencies
+	•	Backend: .NET 6 / 7 / 8 (depending on your version)
+	•	Frontend: Plain HTML & JavaScript (React planned for future updates)
+
+Future Improvements
+	•	City-based weather search via an interactive map.
+	•	Improved UI with React.
+	•	Database-driven weather data storage.
